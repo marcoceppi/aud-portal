@@ -5,10 +5,7 @@ if( !defined('IN_APP') )
 	die('Khai Phan, GTFO!!');
 }
 
-define('DEFAULT_CONTROLLER', 'Main');
-define('DEFAULT_METHOD', 'init');
-define('REDIS_HOST', '127.0.0.1');
-define('REDIS_PORT', 6379);
+define('API_KEY', '');
 
 // Recommended Error reporting
 error_reporting(E_ALL ^ E_NOTICE);

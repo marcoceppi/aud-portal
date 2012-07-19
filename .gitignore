@@ -1,1 +1,3 @@
-config.inc
+inc/config.inc.php
+views/_cache/*
+report/*
