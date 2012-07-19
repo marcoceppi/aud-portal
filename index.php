@@ -36,10 +36,6 @@ else
 }
 */
 
-//@todo Remove this line
-User::$name = 'marco';
-User::init();
-
 // Double logic to make sure default route exists
 if( file_exists('app/' . $controller . '.php') )
 {
