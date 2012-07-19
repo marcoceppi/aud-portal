@@ -18,7 +18,8 @@ function drawMeLikeYouOtherWhores()
 		{/literal}
 		title: 'Questions from {$fromdate} to {$todate}',
 		{literal}
-		hAxis: {title: 'Day'}
+		hAxis: {title: 'Day'},
+		legend: {position: 'none'}
 	};
 
 	var tagData = google.visualization.arrayToDataTable([
@@ -40,7 +41,8 @@ function drawMeLikeYouOtherWhores()
 	]);
 
 	var tagOptions = {
-		title: 'Related Tags'
+		title: 'Related Tags',
+		legend: {position: 'none'}
 	};
 
 	var tags = new google.visualization.PieChart(document.getElementById('tags'));

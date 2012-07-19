@@ -31,10 +31,10 @@
 	</div>
 	<div class="row">
 		<div class="span8">
-			<div id="days" style="height: 500px;"></div>
+			<div id="days"></div>
 		</div>
 		<div class="span4">
-			<div id="tags" style="height: 500px;"></div>
+			<div id="tags"></div>
 		</div>
 	</div>
 	<div class="row">
