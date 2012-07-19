@@ -1,7 +1,7 @@
 		</div> <!--/row-->
 		<hr>
 		<footer>
-			<p>Created by Marco Ceppi. Hosting provided by Ondina. Code is GPLv3 on Github</p>
+			<p>Created by Marco Ceppi. Hosting provided by Ondina. <a href="https://github.com/marcoceppi/aud-portal" target="_blank">Code is GPLv3 on Github</a></p>
 			<p><small>Ubuntu and Canonical are registered trademarks of Canonical Ltd. The Ask Ubuntu name and logo is a trademark of Stack Exchange Inc.</small></p>
 		</footer>
 	</div><!--/.container-->
