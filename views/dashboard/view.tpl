@@ -3,15 +3,46 @@
 	<div class="row">
 		<div class="span12">
 			<div class="well">
-				<form>
-					<input type="text" class="span4"> <input type="date"> <input type="date">
+				<form class="form-inline" method="get">
+					<div class="control-group">
+						<label class="control-label" for="tagged">Tag:</label>
+						<div class="controls">
+							<input type="text" class="span5" name="tagged" id="tagged" value="{$tagged}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="from">From:</label>
+						<div class="controls">
+							<input type="text" class="span2" name="from" id="from" value="{$fromdate}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="to">To:</label>
+						<div class="controls">
+							<input type="text" class="span2" name="to" id="to" value="{$todate}">
+						</div>
+					</div>
+					<div class="control-group">
+						<button type="submit" class="btn btn-primary">Graph it!</button>
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="span12">
-			<h2 class="inline"><em>{$environment}</em> environment <a href="{$CONTROLLER}/bootstrap/{$environment}" rel="tooltip" data-original-title="Bootstrap"><i class="icon-large icon-play-circle"></i></a>&nbsp;<a href="{$CONTROLLER}/edit/{$environment}" rel="tooltip" data-original-title="Edit"><i class="icon-large icon-pencil"></i></a>&nbsp;<a href="{$CONTROLLER}/delete/{$environment}" rel="tooltip" data-original-title="Remove from Amulet"><i class="icon-large icon-remove"></i></a></h2> 
+		<div class="span8">
+			<div id="days" style="height: 500px;"></div>
+		</div>
+		<div class="span4">
+			<div id="tags" style="height: 500px;"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="offset2 span3">
+			<div id="days_table"></div>
+		</div>
+		<div class="offset1 span4">
+			<div id="tags_table"></div>
 		</div>
 	</div>
 </div><!--/span-->

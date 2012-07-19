@@ -78,6 +78,3 @@ else
 {
 	App::throw_error(404, 'Page not found');
 }
-
-Storage::init();
-Storage::save();

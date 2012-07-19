@@ -32,6 +32,14 @@ label.help
 {
 	z-index:9999;
 }
+.form-inline div
+{
+	display: inline-block;
+}
+form.form-inline
+{
+	margin-bottom:0px;
+}
 kbd
 {
 	white-space:nowrap;
