@@ -1,94 +1,83 @@
 <?php
+/**
+ * Main router
+ *
+ * So many people have frameworks out there, including one I built 
+ * do all this jazz. But! WE'RE PROTOTYPING ON THE FLY GOGOGO. 
+ * Proof of Concept <3. This should all be wrapped in a Router to handle
+ * this kind of magic.
+ * 
+ * @author Marco Ceppi <marco@ceppi.net>
+ * @package Amulet
+ */
 
-$more = true;
-$page = 0;
-$days = array();
-$tags = array();
-$total = 0;
-$tagged = 'application-development';
-$fromdate = strtotime('2012-04-01');
-$todate = strtotime('2012-07-01');
+define('IN_APP', true);
 
-require_once('config.inc');
+require_once('lib/common.php');
 
-while($more)
+$raw_route = (!empty($_GET['__r'])) ? rtrim($_GET['__r'], '/') : DEFAULT_CONTROLLER;
+
+$route_segments = explode('/', $raw_route);
+$controller = ucfirst(strtolower($route_segments[0]));
+
+if( !file_exists('app/' . $controller . '.php') )
 {
-	$page++;
-	$query = 'http://api.stackexchange.com/2.0/questions?pagesize=99&fromdate=' . $fromdate . '&todate=' . $todate . '&order=asc&sort=creation&tagged=' . $tagged . '&site=askubuntu&key=' . $key . '&page=' . $page;
+	$controller = DEFAULT_CONTROLLER;
+	array_unshift($route_segments, $controller);
+}
+/*
+ * Not sure if I should unshift and add the controller (could be helpful?)
+ * or just drop the controller if it's present. Will think about this
+ * @todo
+ *
+else
+{
+	array_shift($route_segments);
+}
+*/
 
-	$questions_compressed = file_get_contents($query);
-	$questions_raw = gzinflate(substr($questions_compressed, 10, -8));
-	$questions_decoded = json_decode($questions_raw, true);
+//@todo Remove this line
+User::$name = 'marco';
+User::init();
 
-	$questions = $questions_decoded['items'];
-	$more = $questions_decoded['has_more'];
-	$backoff = (array_key_exists('backoff', $questions_decoded)) ? $questions_decoded['backoff'] : FALSE;
+// Double logic to make sure default route exists
+if( file_exists('app/' . $controller . '.php') )
+{
+	require_once('app/' . $controller . '.php');
 
-	foreach( $questions as $question )
+	// There might be a better way to do this, but load the View object in to
+	// the controller. That way it has access? Might want to just have the App
+	// extend the the View helper, but I wouldn't want things like assign 
+	// and display to become reserved methods.
+	App::$View->template_dir = array(APPLICATION_ROOT . 'views', APPLICATION_ROOT . 'views/' . strtolower($controller));
+	App::$View->assign('TITLE', $controller);
+	App::$View->assign('CONTROLLER', strtolower($controller));
+
+	$method = (array_key_exists(1, $route_segments)) ? $route_segments[1] : DEFAULT_METHOD;
+	$methods = get_class_methods($controller);
+	
+	if( is_null($methods) )
 	{
-		$date = date('Y-m-d', $question['creation_date']);
-		if( !array_key_exists($date, $days) )
-		{
-			$days[$date] = 0;
-		}
-
-		$days[$date]++;
-		foreach( $question['tags'] as $tag )
-		{
-			if( !array_key_exists($tag, $tags) )
-			{
-				$tags[$tag] = 1;
-			}
-			else
-			{
-				$tags[$tag]++;
-			}
-		}
-		$total++;
+		// Route not found, 404 page
+		App::throw_error(404, 'Page not found');
 	}
 
-	if( $backoff )
+	if( !in_array($method, $methods) )
 	{
-		sleep($backoff+1);
+		$method = DEFAULT_METHOD;
+		$params = array_slice($route_segments, 1);
 	}
+	else
+	{
+		$params = array_slice($route_segments, 2);
+	}
+
+	call_user_func_array(array($controller, $method), $params);
 }
-arsort($tags);
-unset($tags[$tagged]);
-?>
-<DOCTYPE html>
-<html>
-<head>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart", "table"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart()
-      {
-        var data = google.visualization.arrayToDataTable([
-          ['Day', 'Questions'],
-<?php
-foreach($days as $day => $qtotal)
+else
 {
-	echo "['" . $day . "', " . $qtotal . "],";
+	App::throw_error(404, 'Page not found');
 }
-?>
-        ]);
 
-        var options = {
-          title: 'Questions from DATE DUDE',
-          hAxis: {title: 'Day', titleTextStyle: {color: 'blue'}}
-        };
-
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        var table = new google.visualization.Table(document.getElementById('table_div'));
-        chart.draw(data, options);
-        table.draw(data, {showRowNumber: false});
-      }
-</script>
-</head>
-<body>
-<div id="total">Total Questions: <?php echo $total; ?></div>
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
-<div id="table_div" style="width: 200px;"></div>
-</body>
-</html>
+Storage::init();
+Storage::save();
