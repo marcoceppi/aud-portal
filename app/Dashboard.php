@@ -35,7 +35,7 @@ class Dashboard extends App
 		$days = $tags = array();
 		$tagged = str_replace(' ', '', HTTP::data('tagged'));
 		$fromdate = (HTTP::data('from')) ? HTTP::data('from') : date('Y/m/d', strtotime('-1 month'));
-		$todate = (HTTP::data('to')) ? HTTP:data('to') : date('Y/m/d', strtotime('now'));
+		$todate = (HTTP::data('to')) ? HTTP::data('to') : date('Y/m/d', strtotime('now'));
 
 		if( !empty($todate) && !empty($fromdate) && !empty($tagged) )
 		{
