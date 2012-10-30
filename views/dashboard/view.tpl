@@ -12,7 +12,7 @@
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="from">From:</label>
-						<div class="control date" data-date-format="yyyy/mm/dd" data-date="{$fromdate">
+						<div class="control date" data-date-format="yyyy/mm/dd" data-date="{$fromdate}">
 							<input type="text" class="span2" data-date-format="yyyy/mm/dd" name="from" id="from" value="{$fromdate}">
 						</div>
 					</div>
