@@ -7,6 +7,7 @@
 	</div><!--/.container-->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap-datepicker.js"></script>
 	<script src="assets/js/site.js"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">

@@ -13,13 +13,13 @@
 					<div class="control-group">
 						<label class="control-label" for="from">From:</label>
 						<div class="controls">
-							<input type="text" class="span2" name="from" id="from" value="{$fromdate}">
+							<input type="text" class="span2 date" data-date-format="yyyy/mm/dd" name="from" id="from" value="{$fromdate}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="to">To:</label>
 						<div class="controls">
-							<input type="text" class="span2" name="to" id="to" value="{$todate}">
+							<input type="text" class="span2 date" data-date-format="yyyy/mm/dd" name="to" id="to" value="{$todate}">
 						</div>
 					</div>
 					<div class="control-group">
