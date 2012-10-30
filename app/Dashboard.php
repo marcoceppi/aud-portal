@@ -34,9 +34,9 @@ class Dashboard extends App
 		$page = $total = 0;
 		$days = $tags = array();
 		$tagged = str_replace(' ', '', HTTP::data('tagged'));
-		$fromdate = HTTP::data('from');
-		$todate = HTTP::data('to');
-		
+		$fromdate = (HTTP::data('from')) ? HTTP::data('from') : date('Y/m/d', strtotime('-1 month'));
+		$todate = (HTTP::data('to')) ? HTTP:data('to') : date('Y/m/d', strtotime('now'));
+
 		if( !empty($todate) && !empty($fromdate) && !empty($tagged) )
 		{
 			while($more)
@@ -88,7 +88,7 @@ class Dashboard extends App
 			static::$View->assign('questions', $questions);
 			static::$View->assign('JS', static::view_js($days, $tags, $fromdate, $todate));
 		}
-		
+
 		static::$View->assign('fromdate', $fromdate);
 		static::$View->assign('todate', $todate);
 		static::$View->assign('tagged', $tagged);
@@ -102,7 +102,6 @@ class Dashboard extends App
 		static::$View->assign('todate', $to);
 		static::$View->assign('tags', array_slice($tags, 0, 8, true));
 		static::$View->assign('all_tags', $tags);
-		
 		return static::$View->fetch('view.js.tpl');
 	}
 }
