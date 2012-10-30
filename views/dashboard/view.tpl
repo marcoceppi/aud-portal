@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="span12">
 			<div class="well">
-				<form class="form-inline" method="get">
+				<form class="form-inline" method="get" autocomplete="off">
 					<div class="control-group">
 						<label class="control-label" for="tagged">Tag:</label>
 						<div class="controls">
