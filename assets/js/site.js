@@ -1,5 +1,6 @@
 $(function()
 {
 	$('a[rel=tooltip]').tooltip();
-	$('.date').datepicker();
+	$('#to').datepicker();
+	$('#from').datepicker();
 });

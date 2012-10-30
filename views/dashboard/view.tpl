@@ -12,14 +12,14 @@
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="from">From:</label>
-						<div class="control date" data-date-format="yyyy/mm/dd" data-date="{$fromdate}">
-							<input type="text" class="span2" data-date-format="yyyy/mm/dd" name="from" id="from" value="{$fromdate}">
+						<div class="control">
+							<input type="text" class="span2" data-date-format="yyyy/mm/dd" data-date="{$fromdate}" name="from" id="from" value="{$fromdate}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="to">To:</label>
-						<div class="controls date" data-date-format="yyyy/mm/dd" data-date="{$todate}">
-							<input type="text" class="span2" data-date-format="yyyy/mm/dd" name="to" id="to" value="{$todate}">
+						<div class="controls">
+							<input type="text" class="span2" data-date-format="yyyy/mm/dd" data-date="{$todate}" name="to" id="to" value="{$todate}">
 						</div>
 					</div>
 					<div class="control-group">
